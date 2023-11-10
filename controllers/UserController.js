@@ -11,7 +11,9 @@ export const register = async (req, res) => {
         const doc = new UserModel({
             email: req.body.email,
             passwordHash: hash,
-            phoneNumber: req.body.phoneNumber
+            phoneNumber: req.body.phoneNumber,
+            town: req.body.town,
+            userName: req.body.userName
         })
 
         const user = await doc.save();
@@ -35,7 +37,7 @@ export const register = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Register failed' });
+        res.status(500).json({ message: `Register failed – ${error}` });
     }
 }
 
