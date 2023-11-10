@@ -12,3 +12,9 @@ export const loginValidator = [
     body('email', 'Некорректный email').isString().isEmail(),
     body('password', 'Мінімальна довжина символів').isString().isLength({min: 5}),
 ]
+
+export const requestValidator = [
+    body('title', 'Некоректна назва').isString().isLength({min: 5}),
+    body('text', 'Некоректний опис').isString().isLength({min: 10}),
+    body('category', 'Некоректна категорія').isString().isLength({min: 3}),
+]
