@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { loginValidator, registerValidator, requestValidator } from './helpers/validators.js';
-import { getUser, login, register } from './controllers/UserController.js';
+import { getAllUsers, getUser, login, register } from './controllers/UserController.js';
 import handleValidationError from './middlewares/handleValidationError.js';
 import isAuthenificated from './middlewares/isAuthenificated.js';
 import { createRequest, deleteOneRequest, getAllRequests, getOneRequest, updateRequest } from './controllers/RequestController.js';
@@ -35,6 +35,7 @@ app.post("/create", isAuthenificated, requestValidator, createRequest)
 app.get('/requests/:id', getOneRequest)
 app.delete('/requests/:id', isAuthenificated, deleteOneRequest)
 app.patch('/requests/:id', isAuthenificated, updateRequest)
+app.get('/users', getAllUsers)
 
 
 app.listen(PORT, (error) => {

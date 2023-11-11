@@ -102,3 +102,14 @@ export const getUser = async (req, res) => {
         res.status(500).json({ message: 'Data fetching error' });
     }
 }
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find({}, { passwordHash: 0 });
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({
+            message: `Не вийшло отримати всіх користувачів ${error}`,
+        });
+    }
+}
