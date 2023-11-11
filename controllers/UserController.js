@@ -1,8 +1,13 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/User.js';
+import dotenv from 'dotenv'
+dotenv.config();
+
+const SECRET_KEY = process.env.SECRET_KEY;
 
 export const register = async (req, res) => {
+
     try {
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);
@@ -22,7 +27,7 @@ export const register = async (req, res) => {
             {
                 _id: user._id
             }, 
-            "secretKey5566",
+            SECRET_KEY,
             {
                 expiresIn: '30d'
             }
@@ -60,7 +65,7 @@ export const login = async (req, res) => {
             {
                 _id: user._id
             }, 
-            "secretKey5566",
+            SECRET_KEY,
             {
                 expiresIn: '30d'
             }
@@ -75,7 +80,7 @@ export const login = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Login failed' });
+        res.status(500).json({ message: `'Login failed' – ${error}` });
     }
 }
 

@@ -24,7 +24,7 @@ export const createRequest = async (req, res) => {
 
 export const getAllRequests = async (req, res) => {
 	try {
-		const requests = await RequestModel.find().populate('user').exec();
+		const requests = await RequestModel.find().populate('user', '-passwordHash').exec();
 		res.json(requests);
 	} catch (error) {
 		res.status(500).json({
@@ -85,7 +85,7 @@ export const updateRequest = async (req, res) => {
             category: req.body.category
         })
         res.json({
-            success: true,
+            success: true,  
         })
     } catch (error) {
         res.status(500).json({
