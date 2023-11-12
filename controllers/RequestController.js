@@ -24,7 +24,7 @@ export const createRequest = async (req, res) => {
 
 export const getAllRequests = async (req, res) => {
 	try {
-		const requests = await RequestModel.find().populate('user', '-passwordHash').exec();
+		const requests = await RequestModel.find().sort({createdAt: -1}).populate('user', '-passwordHash').exec();
 		res.json(requests);
 	} catch (error) {
 		res.status(500).json({

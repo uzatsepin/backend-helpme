@@ -52,13 +52,13 @@ export const login = async (req, res) => {
         const user = await UserModel.findOne({ email: req.body.email });
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Користувача не знайдено' });
         }
 
         const isPassowrdValid = await bcrypt.compare(req.body.password, user._doc.passwordHash);
 
         if(!isPassowrdValid) {
-            return res.status(404).json({ message: 'Wrong email or password' });
+            return res.status(404).json({ message: 'Невірний email або пароль' });
         }
 
         const token = jwt.sign(
